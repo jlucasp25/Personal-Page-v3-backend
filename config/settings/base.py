@@ -83,7 +83,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "personal_page.users",
-    # Your stuff: custom apps go here
+    "personal_page.core",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -255,7 +255,6 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
-
 
 # django-allauth
 # ------------------------------------------------------------------------------
