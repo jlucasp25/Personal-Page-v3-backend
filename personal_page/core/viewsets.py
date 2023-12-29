@@ -41,6 +41,6 @@ class WorkCompanyViewSet(viewsets.ModelViewSet):
     page_size = 2
 
     def get_queryset(self):
-        if self.request.GET.__contains__('freelance'):
+        if 'freelance' in self.request.GET:
             return WorkCompany.objects.filter(freelance=True)
         return WorkCompany.objects.filter(freelance=False)
