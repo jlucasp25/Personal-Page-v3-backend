@@ -47,6 +47,7 @@ class Company(models.Model):
     link = models.URLField(blank=True)
     put_white_background = models.BooleanField(default=False)
     description = models.TextField(blank=True)
+
     class Meta:
         abstract = True
 
@@ -66,6 +67,40 @@ class CustomerCompany(Company):
 
     def __str__(self):
         return self.name
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    date = models.DateField()
+    link = models.URLField(blank=True)
+    logo = models.ImageField(upload_to='event')
+
+    class Meta:
+        verbose_name = 'Event'
+        verbose_name_plural = 'Events'
+        ordering = ['-date']
+
+    def __str__(self):
+        return self.title
+
+
+class Lecture(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    thumbnail = models.ImageField(upload_to='lecture')
+    link = models.URLField(blank=True)
+    date = models.DateField()
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='lectures')
+    duration = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        verbose_name = 'Lecture'
+        verbose_name_plural = 'Lectures'
+        ordering = ['-date']
+
+    def __str__(self):
+        return self.title
 
 
 class Project(models.Model):

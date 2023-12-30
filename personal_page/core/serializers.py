@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from rest_framework import serializers
 
-from personal_page.core.models import Activity, Technology, WorkCompany, Project, CustomerCompany
+from personal_page.core.models import Activity, Technology, WorkCompany, Project, CustomerCompany, Event, Lecture
 
 
 class ActivitySerializer(serializers.ModelSerializer):
@@ -53,3 +53,17 @@ class WorkCompanySerializer(serializers.ModelSerializer):
                                                        'number': result_page.number,
                                                        'page_size': result_page.paginator.per_page,
                                                        'count': paginator.count}}
+
+
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = '__all__'
+
+
+class LectureSerializer(serializers.ModelSerializer):
+    event = EventSerializer(read_only=True, many=False)
+
+    class Meta:
+        model = Lecture
+        fields = '__all__'
