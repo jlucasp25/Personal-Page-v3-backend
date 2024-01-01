@@ -16,8 +16,6 @@ class TechnologyViewSet(viewsets.ModelViewSet):
     queryset = Technology.objects.filter(active=True)
     serializer_class = TechnologySerializer
     permission_classes = [permissions.AllowAny]
-    pagination_class = PageNumberPagination
-    page_size = 2
 
     def get_queryset(self):
         if self.request.GET.__contains__('inactive'):
