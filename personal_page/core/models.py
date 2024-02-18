@@ -111,14 +111,15 @@ class Project(models.Model):
     date_from = models.DateField(blank=True)
     date_to = models.DateField(blank=True, null=True)
     technologies = models.ManyToManyField(Technology)
-    logo = models.ImageField(upload_to='work_project_logos')
-    screenshot = models.ImageField(upload_to='work_project_screenshots', blank=True)
+    logo = models.ImageField(upload_to='work_project_logos', blank=True, null=True)
+    screenshot = models.ImageField(upload_to='work_project_screenshots', blank=True, null=True)
     overview = models.TextField(blank=True)
     customer = models.ForeignKey(CustomerCompany, on_delete=models.CASCADE, blank=True,
                                  null=True)
     order = models.IntegerField(default=0)
     demo_address = models.CharField(blank=True)
     put_white_background = models.BooleanField(default=False)
+    minor_project = models.BooleanField(default=False, blank=True)
 
     class Meta:
         verbose_name = 'Project'

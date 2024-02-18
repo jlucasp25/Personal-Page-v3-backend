@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static personal_tags %}
 
 {% block extra_head %}
   <link rel="preload" href="{% static 'images/lego.svg' %}"
@@ -25,6 +25,7 @@
       <div class="about-me-content flex flex-row">
         <img
           data-aos="fade-bottom"
+          data-tilt data-tilt-reset-to-start="true" data-tilt-startX="-10"
           class="pfp" src="{% static 'images/eu.jpeg' %}" alt="Eu.">
         <div class="flex flex-column card about-me-card">
           <p>Based in Porto, Portugal.</p>
@@ -38,21 +39,32 @@
       </div>
 
     </section>
-    <section class="intro">
+    <section class="projects">
       <h2 class="background-big-text top-left" data-aos="fade-left">PROJECTS</h2>
       <h2 class="background-smaller-text top-right full-time" data-aos="fade-right">FULL-TIME</h2>
       <div class="project-content grid grid-cols-3 gap-4">
         {% for project in projects %}
-          <div class="project-element" data-tilt data-tilt-reset-to-start="true" data-tilt-startX="-20">
+          <div class="project-element" data-tilt>
             <div class="tilt-popoff">
               <img class="project-photo" src="{{ project.screenshot.url }}" alt="">
-              <p>{{ project.name }}</p>
-              <p>{{ project.company }}</p>
+              <div class="project-description">
+                {% if project.logo %}
+                  <img class="project-logo" src="{{ project.logo.url }}" alt="">
+                {% else %}
+                  <p>{{ project.name }}</p>
+                {% endif %}
+                <div class="company-wrapper">
+                  {% if project.company.logo %}
+                    <img class="company-logo" src="{{ project.company.logo.url }}" alt="">
+                  {% else %}
+                    <p>{{ project.company }}</p>
+                  {% endif %}
+                </div>
+              </div>
             </div>
           </div>
         {% endfor %}
       </div>
-
     </section>
   </main>
 
