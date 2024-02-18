@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+  <link rel="preload" href="{% static 'images/lego.svg' %}"
+        as="image"
+        type="image/svg+xml"
+  >
+  <link rel="stylesheet" href="{% static 'project.css' %}">
+{% endblock %}
+
+{% block content %}
+  <!--BASED ON https://yasio.dev/ & https://www.stevenmengin.com/-->
+  <main style="display: none">
+    <section class="entry">
+      <div class="entry-text">
+        <h1 data-aos="fade-left">João Lucas Pires</h1>
+        <div class="flex flex-row entry-wrapper" data-aos="fade-right">
+          <p id="entry-text"></p>
+        </div>
+      </div>
+    </section>
+    <section class="about-me">
+      <h2 class="background-big-text top-right" data-aos="fade-right">ABOUT ME</h2>
+      <div class="about-me-content flex flex-row">
+        <img
+          data-aos="fade-bottom"
+          class="pfp" src="{% static 'images/eu.jpeg' %}" alt="Eu.">
+        <div class="flex flex-column card about-me-card">
+          <p>Based in Porto, Portugal.</p>
+          <p>I'm a Software Engineer focused on creating fully fledged applications for various types of companies.</p>
+          <p>My specialization is in backoffices and administrative platforms.</p>
+          <p>I'm currently employed at PlatformE.</p>
+          <p>In my spare time, I mantain several Web and Mobile Applications built from the ground up by me for several
+            small local companies.</p>
+          <p>My primary stack is Django and HTMX.</p>
+        </div>
+      </div>
+
+    </section>
+    <section class="intro">
+      <h2 class="background-big-text top-left" data-aos="fade-left">PROJECTS</h2>
+      <h2 class="background-smaller-text top-right full-time" data-aos="fade-right">FULL-TIME</h2>
+      <div class="project-content grid grid-cols-3 gap-4">
+        {% for project in projects %}
+          <div class="project-element" data-tilt data-tilt-reset-to-start="true" data-tilt-startX="-20">
+            <div class="tilt-popoff">
+              <img class="project-photo" src="{{ project.screenshot.url }}" alt="">
+              <p>{{ project.name }}</p>
+              <p>{{ project.company }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    const entryText = new Typed('#entry-text', {
+      strings: ["Full-Stack Software Engineer", "System Administrator", "Mobile Apps Developer", "Systems Architect"],
+      typeSpeed: 50,
+      backSpeed: 50,
+      smartBackspace: true, // this is a default
+      loop: true
+    });
+  </script>
+{% endblock content %}
