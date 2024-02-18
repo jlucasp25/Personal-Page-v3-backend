@@ -2,9 +2,7 @@
   "name": "personal_page",
   "version": "3.0.0",
   "devDependencies": {
-    "@popperjs/core": "^2.10.2",
     "autoprefixer": "^10.4.0",
-    "bootstrap": "^5.2.3",
     "browser-sync": "^2.27.7",
     "gulp-concat": "^2.6.1",
     "cssnano": "^6.0.0",
